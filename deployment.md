@@ -2,7 +2,7 @@
 
 This deployment procedure is made for purpose of deploying the apps for development server only.
 
-Currently, you need 4 projects namely Indozonify-web, common-lib, auth-service and payload-decoder.
+Currently, you need all of the projects below for the system to work properly.
 
 ## indozonify-web
 1. clone the project
@@ -24,8 +24,19 @@ This project is a dependency for auth-service project. You just need to build th
 4. scp target/auth-service.jar to server
 5. in the ‘/root’ directory, execute `java -jar auth-service.jar`
 
-## payload-decoder
+## master-data
 1. clone the project
-2. zip and scp the project folder
-3. in the project folder, execute `docker build -t payload_decoder .`
-4. then execute `docker run -p 5000:5000 -t -d payload_decoder`
+2. execute `mvn clean package`
+3. scp target/master-data.jar to server
+4. in the ‘/root’ directory, execute `java -jar master-data.jar`
+
+## device-service
+1. clone the project
+2. execute `mvn clean package`
+3. scp target/device-service.jar to server
+4. in the ‘/root’ directory, execute `java -jar device-service.jar`
+
+## uplink-message-service
+1. clone the project
+2. execute `docker build -t uplink-message-service .`
+3. execute `docker run -p 8000:8000 -t -d uplink-message-service`
